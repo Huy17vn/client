@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+    <link rel="stylesheet" href="student.css">
+    <script src="student.js"></script>
+
+</head>
+<body>
+   <ul class="listStudent" id="listStudent">
+       <li></li>
+   </ul>
+<!--<script-->
+        <!--src="https://code.jquery.com/jquery-3.3.1.min.js"-->
+        <!--integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="-->
+        <!--crossorigin="anonymous">-->
+<!--</script>-->
+<script>
+    $.ajax({
+        method: 'GET',
+        url: 'https://localhost:44357/api/Students1',
+        headers:{
+            'contentType': 'application/json',
+        },
+        success: function (data, textStatus, jqXHR) {
+            var htmlContent = '';
+            for (var i = 0; i <data.length ; i++) {
+                htmlContent += `<li>${"Name: "+""+data[i].firstName+ "" +data[i].lastName+ "</br>" +"email: "+data[i].email +"</br>"+"Phone: "+""+data[i].phoneNumber}</li>`;
+            }
+            $('.listStudent').html(htmlContent);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Error');
+        }
+    });
+</script>
+</body>
+</html>
